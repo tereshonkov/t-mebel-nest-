@@ -7,7 +7,7 @@ import {
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from '../prisma/prisma.service';
-import { Response } from 'express';
+import { Response, Request } from 'express';
 import { LoginRequest } from './dto/login.dto';
 import { RegisterRequest } from './dto/register.dto';
 import { hash, verify } from 'argon2';
@@ -25,11 +25,10 @@ export class AuthService {
     private readonly configService: ConfigService,
     private readonly jwtService: JwtService,
   ) {
-    ((this.COOKIE_DOMAIN =
-      this.configService.getOrThrow<string>('COOKIE_DOMAIN')),
-      (this.JWT_ACCESS_TOKEN_TTL = this.configService.getOrThrow<string>(
-        'JWT_ACCESS_TOKEN_TTL',
-      )));
+    this.COOKIE_DOMAIN = this.configService.getOrThrow<string>('COOKIE_DOMAIN');
+    this.JWT_ACCESS_TOKEN_TTL = this.configService.getOrThrow<string>(
+      'JWT_ACCESS_TOKEN_TTL',
+    );
     this.JWT_REFRESH_TOKEN_TTL = this.configService.getOrThrow<string>(
       'JWT_REFRESH_TOKEN_TTL',
     );
@@ -54,6 +53,7 @@ export class AuthService {
         password: await hash(password),
       },
     });
+    return this.auth(res, user.id);
   }
 
   async login(res: Response, dto: LoginRequest) {
@@ -95,6 +95,35 @@ export class AuthService {
       expiresIn: this.JWT_REFRESH_TOKEN_TTL,
     });
     return { accessToken, refreshToken };
+  }
+
+  async refresh(res: Response, req: Request) {
+    const refreshToken: string | undefined =
+      req.cookies && typeof req.cookies['refreshToken'] === 'string'
+        ? req.cookies['refreshToken']
+        : undefined;
+    if (!refreshToken) {
+      throw new UnauthorizedException('Пользователь не авторизирован');
+    }
+
+    const payload: JwtPayload = this.jwtService.verify(refreshToken);
+
+    if (payload) {
+      const user = await this.prismaService.user.findUnique({
+        where: {
+          id: payload.id,
+        },
+        select: {
+          id: true,
+        },
+      });
+
+      if (!user) {
+        throw new UnauthorizedException('Пользователь не авторизирован');
+      }
+
+      return this.auth(res, user.id);
+    }
   }
 
   private async validate(id: string): Promise<User> {
