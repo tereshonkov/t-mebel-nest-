@@ -1,0 +1,71 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Product {
+  id String @id @default(uuid())
+
+  title       String
+  description String
+  color       String
+  furnitures  String
+  images      Image[]
+  width       Int
+  height      Int
+  rating      Float
+  category    Category @default(OTHER)
+  reviews     Review[]
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("product")
+}
+
+model Review {
+  id String @id @default(uuid())
+
+  name      String
+  text      String
+  image     Image[]
+  productId String  @map("product_id")
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("reviews")
+}
+
+model Image {
+  id String @id @default(uuid())
+
+  url       String
+  product   Product? @relation(fields: [productId], references: [id])
+  productId String? @map("product_id")
+  review    Review?  @relation(fields: [reviewId], references: [id])
+  reviewId  String?
+  isCover   Boolean  @default(false) @map("is_cover")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  @@map("image")
+}
+
+enum Category {
+  KITCHEN
+  WARDROBE
+  STORE
+  BEDROOM
+  OTHER
+}
