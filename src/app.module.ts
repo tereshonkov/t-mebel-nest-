@@ -6,6 +6,7 @@ import { ProductModule } from './product/product.module';
 import { ReviewsModule } from './reviews/reviews.module';
 import { TelegramModule } from './telegram/telegram.module';
 import { ConfigModule } from '@nestjs/config/dist/config.module';
+import { PrismaService } from 'nestjs-prisma';
 
 @Module({
   imports: [
@@ -13,9 +14,10 @@ import { ConfigModule } from '@nestjs/config/dist/config.module';
     ProductModule,
     ReviewsModule,
     TelegramModule,
+    PrismaService,
     ConfigModule.forRoot({ isGlobal: true, envFilePath: 'env' }),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, PrismaService],
 })
 export class AppModule {}
