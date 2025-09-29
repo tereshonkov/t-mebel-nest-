@@ -1,14 +1,17 @@
-import { Controller } from '@nestjs/common';
+import { Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { Get, Req, Res } from '@nestjs/common';
+import { Get, Req, Res, Body } from '@nestjs/common';
 import type { RequestWithCookies } from './interfaces/cookie.interface';
 import { UnauthorizedException } from '@nestjs/common';
 import type { Response } from 'express';
 import {
   ApiBadRequestResponse,
+  ApiNotFoundResponse,
   ApiOkResponse,
   ApiOperation,
 } from '@nestjs/swagger';
+import { LoginRequest } from './dto/login.dto';
+import { RegisterRequest } from './dto/register.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -36,5 +39,46 @@ export class AuthController {
 
     res.cookie('refreshToken', tokens?.refreshToken, { httpOnly: true });
     return tokens;
+  }
+
+  @ApiOperation({
+    summary: 'Авторизация пользователя',
+    description: 'Авторизация пользователя по email и паролю',
+  })
+  @ApiOkResponse({ description: 'Пользователь успешно авторизован' })
+  @ApiBadRequestResponse({ description: 'Неверные данные авторизации' })
+  @ApiNotFoundResponse({ description: 'Пользователь не найден' })
+  @HttpCode(HttpStatus.OK)
+  @Post('login')
+  async login(
+    @Res({ passthrough: true }) res: Response,
+    @Body() dto: LoginRequest,
+  ) {
+    return this.authService.login(res, dto);
+  }
+
+  @ApiOperation({
+    summary: 'Регистрация пользователя',
+    description: 'Регистрация пользователя по имени, email и паролю',
+  })
+  @ApiOkResponse({ description: 'Пользователь успешно зарегистрирован' })
+  @ApiBadRequestResponse({ description: 'Неверные данные регистрации' })
+  @Post('register')
+  async register(
+    @Res({ passthrough: true }) res: Response,
+    @Body() dto: RegisterRequest,
+  ) {
+    const user = await this.authService.register(res, dto);
+    return user;
+  }
+
+  @ApiOperation({
+    summary: 'Выход из системы',
+    description: 'Выход из системы и удаление refreshToken из httpOnly cookie',
+  })
+  @ApiOkResponse({ description: 'Пользователь успешно вышел из системы' })
+  @Post('logout')
+  logout(@Res({ passthrough: true }) res: Response) {
+    return this.authService.logout(res);
   }
 }

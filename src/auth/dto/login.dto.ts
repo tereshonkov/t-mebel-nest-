@@ -4,7 +4,7 @@ import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
 export class LoginRequest {
   @ApiProperty({
     description: 'Email пользователя',
-    example: 'Например user@example.com',
+    example: 'user@example.com',
   })
   @IsString()
   @IsNotEmpty()
@@ -13,7 +13,7 @@ export class LoginRequest {
 
   @ApiProperty({
     description: 'Пароль пользователя',
-    example: 'Например strongPassword',
+    example: 'strongPassword12345',
   })
   @IsString()
   @IsNotEmpty()

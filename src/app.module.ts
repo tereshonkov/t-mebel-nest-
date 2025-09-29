@@ -11,6 +11,8 @@ import { JwtModule } from '@nestjs/jwt';
 import { getJwtConfig } from './config/jwt.config';
 import { ConfigService } from '@nestjs/config';
 import { PrismaModule } from 'nestjs-prisma';
+import { UserModule } from './user/user.module';
+import { ImagesModule } from './images/images.module';
 
 @Module({
   imports: [
@@ -26,6 +28,8 @@ import { PrismaModule } from 'nestjs-prisma';
     ReviewsModule,
     TelegramModule,
     PrismaModule,
+    UserModule,
+    ImagesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

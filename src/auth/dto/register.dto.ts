@@ -4,7 +4,7 @@ import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
 export class RegisterRequest {
   @ApiProperty({
     description: 'Имя пользователя',
-    example: 'Например Ivan',
+    example: 'Ivan',
   })
   @IsNotEmpty()
   @IsString()

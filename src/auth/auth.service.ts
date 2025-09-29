@@ -118,6 +118,11 @@ export class AuthService {
     }
   }
 
+  logout(res: Response) {
+    this.setCookie(res, '', new Date());
+    return true;
+  }
+
   public async validate(id: string): Promise<User> {
     const user: User | null = await this.prismaService.user.findUnique({
       where: {
