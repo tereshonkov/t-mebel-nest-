@@ -97,15 +97,7 @@ export class AuthService {
     return { accessToken, refreshToken };
   }
 
-  async refresh(res: Response, req: Request) {
-    const refreshToken: string | undefined =
-      req.cookies && typeof req.cookies['refreshToken'] === 'string'
-        ? req.cookies['refreshToken']
-        : undefined;
-    if (!refreshToken) {
-      throw new UnauthorizedException('Пользователь не авторизирован');
-    }
-
+  async refresh(refreshToken: string) {
     const payload: JwtPayload = this.jwtService.verify(refreshToken);
 
     if (payload) {
@@ -122,11 +114,11 @@ export class AuthService {
         throw new UnauthorizedException('Пользователь не авторизирован');
       }
 
-      return this.auth(res, user.id);
+      return this.generateToken(user.id);
     }
   }
 
-  private async validate(id: string): Promise<User> {
+  public async validate(id: string): Promise<User> {
     const user: User | null = await this.prismaService.user.findUnique({
       where: {
         id,
