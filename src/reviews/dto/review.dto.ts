@@ -1,7 +1,18 @@
-import { ImageRequest } from 'src/images/dto/image.dto';
+import { IsBoolean, IsNotEmpty, IsString } from 'class-validator';
 
 export class ReviewRequest {
+  @IsString()
+  @IsNotEmpty()
   name: string;
+
+  @IsString()
+  @IsNotEmpty()
   text: string;
-  image: ImageRequest[];
+
+  @IsBoolean()
+  isApproved: boolean;
+
+  @IsNotEmpty()
+  @IsString()
+  productId: string;
 }
