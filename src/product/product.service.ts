@@ -7,7 +7,12 @@ export class ProductService {
   constructor(private readonly prismaService: PrismaService) {}
 
   async getAll() {
-    const products = await this.prismaService.product.findMany();
+    const products = await this.prismaService.product.findMany({
+      include: {
+        images: true,
+        reviews: true,
+      },
+    });
 
     if (products.length === 0) {
       throw new NotFoundException('Продукты не найдены');
@@ -20,6 +25,10 @@ export class ProductService {
     const product = await this.prismaService.product.findUnique({
       where: {
         id,
+      },
+      include: {
+        images: true,
+        reviews: true,
       },
     });
 
