@@ -43,8 +43,6 @@ export class ReviewsController {
     return this.reviewsService.getNotApprovedReviews();
   }
 
-  @UseGuards(JwtAuthGuard, RoleGuard)
-  @Roles(Role.ADMIN)
   @ApiOperation({ summary: 'Создать отзыв' })
   @ApiBadRequestResponse({ description: 'Ошибка при создании отзыва' })
   @ApiOkResponse({ description: 'Отзыв успешно создан' })
