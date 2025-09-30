@@ -13,7 +13,7 @@ export class ReviewRequest {
   text: string;
 
   @IsBoolean()
-  isApproved: boolean;
+  isApproved?: boolean;
 
   @ApiProperty({ example: 'product-id-123' })
   @IsNotEmpty()
