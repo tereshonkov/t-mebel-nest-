@@ -1,4 +1,12 @@
-import { Controller, Post, UseGuards, Body, Get, Param } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  UseGuards,
+  Body,
+  Get,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { ReviewsService } from './reviews.service';
 import { JwtAuthGuard } from 'src/auth/guards/auth.guards';
 import { RoleGuard } from 'src/auth/guards/role.guard';
@@ -50,7 +58,7 @@ export class ReviewsController {
   @ApiOperation({ summary: 'Удалить отзыв' })
   @ApiBadRequestResponse({ description: 'Ошибка при удалении отзыва' })
   @ApiOkResponse({ description: 'Отзыв успешно удален' })
-  @Post('delete-review/:id')
+  @Delete('delete-review/:id')
   async deleteReview(@Param('id') id: string) {
     return this.reviewsService.deleteReview(id);
   }
