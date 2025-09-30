@@ -7,7 +7,7 @@ import { setupSwagger } from './utils/swagger.utils';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({
-    origin: true,
+    origin: ['https://www.t-mebel.com.ua', 'https://localhost:3000'],
     credentials: true,
   });
 
