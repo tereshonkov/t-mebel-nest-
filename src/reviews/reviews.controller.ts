@@ -26,7 +26,7 @@ export class ReviewsController {
   @ApiOperation({ summary: 'Получить все отзывы' })
   @ApiBadRequestResponse({ description: 'Ошибка при получении отзывов' })
   @ApiOkResponse({ description: 'Отзывы успешно получены' })
-  @Get('reviews')
+  @Get()
   async getAllApprovedReviews() {
     return this.reviewsService.getAllApprovedReviews();
   }
