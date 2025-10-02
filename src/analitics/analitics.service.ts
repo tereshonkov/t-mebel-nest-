@@ -7,10 +7,6 @@ import { startOfDay, endOfDay, startOfMonth, endOfMonth } from 'date-fns';
 import { AnaliticsRequest } from './dto/analitics.dto';
 import { Prisma, Visitor } from '@prisma/client';
 
-type VisitorWithRelations = Prisma.VisitorGetPayload<{
-  include: { visits: true; called: true };
-}>;
-
 @Injectable()
 export class AnaliticsService {
   constructor(private prismaService: PrismaService) {}
@@ -71,6 +67,9 @@ export class AnaliticsService {
         },
       });
     }
+
+    console.log('Visitor created:', visitor);
+    console.log('URL to save:', dto.url);
     return visitor;
   }
 }
