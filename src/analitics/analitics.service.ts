@@ -62,6 +62,15 @@ export class AnaliticsService {
         userAgent: dto.userAgent,
       } as Prisma.VisitorUncheckedCreateInput,
     });
+
+    if (dto.url) {
+      await this.prismaService.pageVisit.create({
+        data: {
+          url: dto.url,
+          visitorId: visitor.id,
+        },
+      });
+    }
     return visitor;
   }
 }

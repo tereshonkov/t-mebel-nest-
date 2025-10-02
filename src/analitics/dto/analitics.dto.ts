@@ -7,6 +7,7 @@ export class AnaliticsRequest {
     description: 'IP адрес посетителя',
   })
   ip?: string;
+  url?: string;
 
   @ApiProperty({
     example:
