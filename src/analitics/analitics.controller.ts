@@ -13,6 +13,28 @@ import { RoleGuard } from 'src/auth/guards/role.guard';
 import { Roles } from '../common/role.decorator';
 import type { Request } from 'express';
 
+export interface VisitorWithRelations {
+  id: string;
+  ip: string;
+  userAgent: string;
+  createdAt: Date;
+  updatedAt: Date;
+  visits: {
+    id: string;
+    url: string;
+    createdAt: Date;
+    updatedAt: Date;
+    visitorId: string;
+  }[];
+  called: {
+    id: string;
+    createdAt: Date;
+    updatedAt: Date;
+    visitorId: string;
+  }[];
+}
+
+
 @Controller('analitics')
 export class AnaliticsController {
   constructor(private readonly analiticsService: AnaliticsService) {}
@@ -25,7 +47,7 @@ export class AnaliticsController {
   @UseGuards(JwtAuthGuard, RoleGuard)
   @Roles(Role.ADMIN)
   @Get('visitors')
-  async getVisitors(): Promise<AnaliticsRequest[]> {
+  async getVisitors(): Promise<VisitorWithRelations[]> {
     return await this.analiticsService.getVisitors();
   }
 
