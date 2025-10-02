@@ -8,7 +8,7 @@ export class AnaliticsRequest {
   })
   @IsString()
   @IsNotEmpty()
-  ip: string;
+  ip?: string;
 
   @ApiProperty({
     example:
