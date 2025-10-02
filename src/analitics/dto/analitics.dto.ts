@@ -7,7 +7,6 @@ export class AnaliticsRequest {
     description: 'IP адрес посетителя',
   })
   @IsString()
-  @IsNotEmpty()
   ip?: string;
 
   @ApiProperty({
