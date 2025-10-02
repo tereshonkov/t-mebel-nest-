@@ -12,7 +12,7 @@ export class TelegramService {
     @InjectBot() private readonly bot: Telegraf,
     private readonly configService: ConfigService,
   ) {
-    if (process.env.NODE_ENV !== 'dev') {
+    if (process.env.NODE_ENV === 'dev') {
       // не инициализируем бота локально
       return;
     }
