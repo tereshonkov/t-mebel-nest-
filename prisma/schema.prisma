@@ -16,13 +16,14 @@ datasource db {
 model User {
   id String @id @default(uuid())
 
-  name String
-  email String @unique
+  name     String
+  email    String @unique
   password String
-  role Role @default(USER)
+  role     Role   @default(USER)
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
+
   @@map("user")
 }
 
@@ -48,11 +49,11 @@ model Product {
 model Review {
   id String @id @default(uuid())
 
-  name      String
-  text      String
-  image     Image[]
-  productId String  @map("product_id")
-  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  name       String
+  text       String
+  image      Image[]
+  productId  String  @map("product_id")
+  product    Product @relation(fields: [productId], references: [id], onDelete: Cascade)
   isApproved Boolean @default(false) @map("is_aproved")
 
   createdAt DateTime @default(now()) @map("created_at")
@@ -66,14 +67,49 @@ model Image {
 
   url       String
   product   Product? @relation(fields: [productId], references: [id])
-  productId String? @map("product_id")
+  productId String?  @map("product_id")
   review    Review?  @relation(fields: [reviewId], references: [id])
   reviewId  String?
   isCover   Boolean  @default(false) @map("is_cover")
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
+
   @@map("image")
+}
+
+model Visitor {
+  id String @id @default(uuid())
+
+  ip        String @unique
+  userAgent String @map("user_agent")
+  visits    PageVisit[]
+  called    CallClick[]
+
+  createdAt DateTime    @default(now()) @map("created_at")
+  updatedAt DateTime    @updatedAt @map("updated_at")
+  @@map("visitor")
+}
+
+model PageVisit {
+  id        String   @id @default(uuid())
+  visitor   Visitor  @relation(fields: [visitorId], references: [id], onDelete: Cascade)
+  visitorId String   @map("visitor_id")
+  url       String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("page_visit")
+}
+
+model CallClick {
+  id        String   @id @default(uuid())
+  visitor   Visitor  @relation(fields: [visitorId], references: [id], onDelete: Cascade)
+  visitorId String   @map("visitor_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("call_click")
 }
 
 enum Category {

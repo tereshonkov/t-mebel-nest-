@@ -13,6 +13,9 @@ import { ConfigService } from '@nestjs/config';
 import { PrismaModule } from 'nestjs-prisma';
 import { UserModule } from './user/user.module';
 import { ImagesModule } from './images/images.module';
+import { AnaliticsModule } from './analitics/analitics.module';
+import { PagevisitModule } from './pagevisit/pagevisit.module';
+import { CallclickModule } from './callclick/callclick.module';
 
 @Module({
   imports: [
@@ -30,6 +33,9 @@ import { ImagesModule } from './images/images.module';
     PrismaModule,
     UserModule,
     ImagesModule,
+    AnaliticsModule,
+    PagevisitModule,
+    CallclickModule,
   ],
   controllers: [AppController],
   providers: [AppService],
