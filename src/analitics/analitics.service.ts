@@ -7,11 +7,27 @@ import { startOfDay, endOfDay, startOfMonth, endOfMonth } from 'date-fns';
 import { AnaliticsRequest } from './dto/analitics.dto';
 import { Prisma, Visitor } from '@prisma/client';
 
+export interface VisitorWithRelations {
+  id: string;
+  ip: string;
+  userAgent: string;
+  createdAt: Date;
+  updatedAt: Date;
+  visits: {
+    id: string;
+    url: string;
+    createdAt: Date;
+    updatedAt: Date;
+    visitorId: string;
+  }[];
+  called: { id: string; createdAt: Date; updatedAt: Date; visitorId: string }[];
+}
+
 @Injectable()
 export class AnaliticsService {
   constructor(private prismaService: PrismaService) {}
 
-  async getVisitors(): Promise<AnaliticsRequest[]> {
+  async getVisitors(): Promise<VisitorWithRelations[]> {
     const visitors = await this.prismaService.visitor.findMany({
       include: { visits: true, called: true },
     });
