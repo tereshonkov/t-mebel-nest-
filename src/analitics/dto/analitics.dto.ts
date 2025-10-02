@@ -6,7 +6,6 @@ export class AnaliticsRequest {
     example: '192.168.0.1',
     description: 'IP адрес посетителя',
   })
-  @IsString()
   ip?: string;
 
   @ApiProperty({
