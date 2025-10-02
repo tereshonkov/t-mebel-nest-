@@ -7,7 +7,11 @@ export class AnaliticsRequest {
     description: 'IP адрес посетителя',
   })
   ip?: string;
-  url?: string;
+
+  @ApiProperty({ example: '/home', description: 'URL посещённой страницы' })
+  @IsString()
+  @IsNotEmpty()
+  url: string;
 
   @ApiProperty({
     example:
