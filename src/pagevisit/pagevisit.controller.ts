@@ -1,4 +1,4 @@
-import { Controller, UseGuards } from '@nestjs/common';
+import { Controller, Get, UseGuards } from '@nestjs/common';
 import { PagevisitService } from './pagevisit.service';
 import { PageVisitRequest } from './dto/pagevisit.dto';
 import { Post, Body } from '@nestjs/common';
@@ -31,7 +31,7 @@ export class PagevisitController {
   @ApiBadRequestResponse({ description: 'Ошибка запроса' })
   @UseGuards(JwtAuthGuard, RoleGuard)
   @Roles(Role.ADMIN)
-  @Post('stats')
+  @Get('stats')
   async getPageVisits(): Promise<StatsDto[]> {
     return await this.pagevisitService.getPageVisits();
   }
