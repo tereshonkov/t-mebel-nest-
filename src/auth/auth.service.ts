@@ -145,7 +145,7 @@ export class AuthService {
   private setCookie(res: Response, value: string, expires: Date) {
     res.cookie('refreshToken', value, {
       httpOnly: true,
-      sameSite: 'lax',
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
       secure: process.env.NODE_ENV === 'production',
       domain:
         this.COOKIE_DOMAIN !== 'localhost' ? this.COOKIE_DOMAIN : undefined,
