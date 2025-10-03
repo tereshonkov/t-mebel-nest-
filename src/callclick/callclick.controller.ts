@@ -1,29 +1,23 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Req } from '@nestjs/common';
 import { CallclickService } from './callclick.service';
 import { Post, Body, Get, Headers } from '@nestjs/common';
 import { ClickRequest } from './dto/callclick.dto';
 import { CallClick } from '@prisma/client';
-import { AuthService } from 'src/auth/auth.service';
+import type { Request } from 'express';
 
 @Controller('callclick')
 export class CallclickController {
-  constructor(
-    private readonly callclickService: CallclickService,
-    private readonly authService: AuthService,
-  ) {}
+  constructor(private readonly callclickService: CallclickService) {}
 
   @Post('record')
   async recordClick(
     @Body() dto: ClickRequest,
-    @Headers('authorization') authHeader: string,
+    @Req() req: Request,
   ): Promise<CallClick> {
-    const token = authHeader?.split(' ')[1];
-
-    const visitorId = this.authService.extractIdFromToken(token);
-    return await this.callclickService.recordClick({
-      ...dto,
-      visitorId,
-    });
+    const ip =
+      req.ip || req.headers['x-forwarded-for']?.toString() || 'unknown';
+    const userAgent = req.headers['user-agent'] || 'unknown';
+    return await this.callclickService.recordClick(dto, ip, userAgent);
   }
 
   @Get()

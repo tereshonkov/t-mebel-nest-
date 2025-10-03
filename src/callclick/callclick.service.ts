@@ -8,11 +8,24 @@ export class CallclickService {
   constructor(private readonly prismaService: PrismaService) {}
 
   async recordClick(
-    dto: ClickRequest & { visitorId: string },
+    dto: ClickRequest,
+    ip: string,
+    userAgent: string,
   ): Promise<CallClick> {
+    let visitor = await this.prismaService.visitor.findUnique({
+      where: { ip },
+    });
+
+    if (!visitor) {
+      visitor = await this.prismaService.visitor.create({
+        data: { ip, userAgent },
+      });
+    }
     return await this.prismaService.callClick.create({
       data: {
-        visitorId: dto.visitorId,
+        visitor: {
+          connect: { id: visitor.id },
+        },
       },
     });
   }
