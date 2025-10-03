@@ -37,7 +37,11 @@ export class AuthController {
 
     const tokens = await this.authService.refresh(refreshToken);
 
-    res.cookie('refreshToken', tokens?.refreshToken);
+    this.authService.setCookie(
+      res,
+      tokens?.refreshToken as string,
+      new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+    );
     return tokens;
   }
 

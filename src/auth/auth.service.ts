@@ -142,7 +142,7 @@ export class AuthService {
     return user;
   }
 
-  private setCookie(res: Response, value: string, expires: Date) {
+  setCookie(res: Response, value: string, expires: Date) {
     res.cookie('refreshToken', value, {
       httpOnly: true,
       sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
