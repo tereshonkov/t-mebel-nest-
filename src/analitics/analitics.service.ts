@@ -65,17 +65,37 @@ export class AnaliticsService {
         },
       },
     });
-    console.log('start:', start.toISOString());
-    console.log('end:', end.toISOString());
     return { dailyUsers: result };
   }
 
   async getMonthlyUsers() {
-    const result = await this.prismaService.user.count({
+    const now = new Date();
+
+    const start = new Date(
+      Date.UTC(
+        now.getUTCFullYear(),
+        now.getUTCMonth(),
+        now.getUTCDate(),
+        0,
+        0,
+        0,
+      ),
+    );
+    const end = new Date(
+      Date.UTC(
+        now.getUTCFullYear(),
+        now.getUTCMonth(),
+        now.getUTCDate(),
+        23,
+        59,
+        59,
+      ),
+    );
+    const result = await this.prismaService.visitor.count({
       where: {
         createdAt: {
-          gte: startOfMonth(new Date()),
-          lt: endOfMonth(new Date()),
+          gte: start,
+          lte: end,
         },
       },
     });
