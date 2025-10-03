@@ -65,6 +65,17 @@ export class AnaliticsService {
         },
       },
     });
+
+    const users = await this.prismaService.user.findMany({
+      where: {
+        createdAt: {
+          gte: start,
+          lte: end,
+        },
+      },
+    });
+
+    console.log('users:', users);
     console.log('start:', start.toISOString());
     console.log('end:', end.toISOString());
     return { dailyUsers: result };
