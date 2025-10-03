@@ -147,8 +147,8 @@ export class AuthService {
       httpOnly: true,
       sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
       secure: process.env.NODE_ENV === 'production',
-      domain:
-        this.COOKIE_DOMAIN !== 'localhost' ? this.COOKIE_DOMAIN : undefined,
+      // domain:
+      //   this.COOKIE_DOMAIN !== 'localhost' ? this.COOKIE_DOMAIN : undefined,
       expires,
     });
   }
