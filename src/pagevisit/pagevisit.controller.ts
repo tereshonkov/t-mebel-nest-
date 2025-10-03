@@ -8,6 +8,7 @@ import {
   ApiOkResponse,
   ApiOperation,
 } from '@nestjs/swagger';
+import { StatsDto } from './dto/stats.dto';
 
 @Controller('pagevisit')
 export class PagevisitController {
@@ -19,5 +20,13 @@ export class PagevisitController {
   @Post('record')
   async recordPageVisit(@Body() dto: PageVisitRequest): Promise<PageVisit> {
     return await this.pagevisitService.recordPageVisit(dto);
+  }
+
+  @ApiOperation({ summary: 'Получить статистику по посещаемым страницам' })
+  @ApiOkResponse({ description: 'Успешный ответ' })
+  @ApiBadRequestResponse({ description: 'Ошибка запроса' })
+  @Post('stats')
+  async getPageVisits(): Promise<StatsDto[]> {
+    return await this.pagevisitService.getPageVisits();
   }
 }
