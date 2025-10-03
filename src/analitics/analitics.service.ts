@@ -61,7 +61,7 @@ export class AnaliticsService {
       where: {
         createdAt: {
           gte: start,
-          lt: end,
+          lte: end,
         },
       },
     });
