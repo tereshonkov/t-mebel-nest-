@@ -37,7 +37,12 @@ export class AuthController {
 
     const tokens = await this.authService.refresh(refreshToken);
 
-    res.cookie('refreshToken', tokens?.refreshToken, { httpOnly: true });
+    res.cookie('refreshToken', tokens?.refreshToken, {
+      httpOnly: true, // кука не доступна из JS
+      sameSite: 'none', // обязательно для кросс-домена
+      secure: true, // обязательно для HTTPS
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 дней
+    });
     return tokens;
   }
 
