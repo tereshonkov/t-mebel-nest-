@@ -1,6 +1,6 @@
 import { Controller } from '@nestjs/common';
 import { CallclickService } from './callclick.service';
-import { Post, Body } from '@nestjs/common';
+import { Post, Body, Get } from '@nestjs/common';
 import { ClickRequest } from './dto/callclick.dto';
 import { CallClick } from '@prisma/client';
 
@@ -11,5 +11,10 @@ export class CallclickController {
   @Post('record')
   async recordClick(@Body() dto: ClickRequest): Promise<CallClick> {
     return await this.callclickService.recordClick(dto);
+  }
+
+  @Get()
+  async getAllClicks(): Promise<CallClick[]> {
+    return await this.callclickService.getAllClicks();
   }
 }

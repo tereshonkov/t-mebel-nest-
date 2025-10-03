@@ -14,4 +14,7 @@ export class CallclickService {
       },
     });
   }
+  async getAllClicks(): Promise<CallClick[]> {
+    return await this.prismaService.callClick.findMany();
+  }
 }
