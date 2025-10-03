@@ -65,6 +65,8 @@ export class AnaliticsService {
         },
       },
     });
+    console.log('start:', start.toISOString());
+    console.log('end:', end.toISOString());
     return { dailyUsers: result };
   }
 
