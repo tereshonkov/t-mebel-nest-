@@ -7,7 +7,9 @@ import { CallClick } from '@prisma/client';
 export class CallclickService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async recordClick(dto: ClickRequest): Promise<CallClick> {
+  async recordClick(
+    dto: ClickRequest & { visitorId: string },
+  ): Promise<CallClick> {
     return await this.prismaService.callClick.create({
       data: {
         visitorId: dto.visitorId,

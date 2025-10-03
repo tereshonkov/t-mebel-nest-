@@ -97,6 +97,13 @@ export class AuthService {
     return { accessToken, refreshToken };
   }
 
+  extractIdFromToken(token: string): string {
+    const payload = this.jwtService.decode<{ id: string }>(token);
+    if (!payload || !payload.id)
+      throw new UnauthorizedException('Пользователь не авторизирован');
+    return payload.id;
+  }
+
   async refresh(refreshToken: string) {
     const payload: JwtPayload = this.jwtService.verify(refreshToken);
 

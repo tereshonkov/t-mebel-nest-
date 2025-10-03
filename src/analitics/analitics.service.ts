@@ -126,9 +126,6 @@ export class AnaliticsService {
         },
       });
     }
-
-    console.log('Visitor created:', visitor);
-    console.log('URL to save:', dto.url);
     return visitor;
   }
 }
