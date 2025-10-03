@@ -3,7 +3,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'nestjs-prisma';
-import { startOfMonth, endOfMonth } from 'date-fns';
 import { AnaliticsRequest } from './dto/analitics.dto';
 import { Prisma, Visitor } from '@prisma/client';
 
