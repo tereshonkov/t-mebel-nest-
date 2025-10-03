@@ -34,7 +34,6 @@ export interface VisitorWithRelations {
   }[];
 }
 
-
 @Controller('analitics')
 export class AnaliticsController {
   constructor(private readonly analiticsService: AnaliticsService) {}
