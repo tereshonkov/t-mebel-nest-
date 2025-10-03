@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'nestjs-prisma';
-import { startOfDay, endOfDay, startOfMonth, endOfMonth } from 'date-fns';
+import { startOfMonth, endOfMonth } from 'date-fns';
 import { AnaliticsRequest } from './dto/analitics.dto';
 import { Prisma, Visitor } from '@prisma/client';
 
@@ -35,11 +35,33 @@ export class AnaliticsService {
   }
 
   async getDailyUsers() {
+    const now = new Date();
+
+    const start = new Date(
+      Date.UTC(
+        now.getUTCFullYear(),
+        now.getUTCMonth(),
+        now.getUTCDate(),
+        0,
+        0,
+        0,
+      ),
+    );
+    const end = new Date(
+      Date.UTC(
+        now.getUTCFullYear(),
+        now.getUTCMonth(),
+        now.getUTCDate(),
+        23,
+        59,
+        59,
+      ),
+    );
     const result = await this.prismaService.user.count({
       where: {
         createdAt: {
-          gte: startOfDay(new Date()),
-          lt: endOfDay(new Date()),
+          gte: start,
+          lt: end,
         },
       },
     });
