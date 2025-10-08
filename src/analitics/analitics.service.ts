@@ -12,17 +12,16 @@ export class AnaliticsService {
   private client: BetaAnalyticsDataClient;
   private propertyId = 'properties/450691991';
   constructor(private prismaService: PrismaService) {
-    if (!process.env.GOOGLE_SERVICE_ACCOUNT_JSON) {
-      throw new Error('Не найден ключ Google Analytics в ENV!');
+    if (process.env.NODE_ENV === 'production') {
+      const credentials = JSON.parse(
+        readFileSync('service-account.json', 'utf8'),
+      );
+      this.client = new BetaAnalyticsDataClient({ credentials });
+    } else {
+      const credentials = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON!);
+      credentials.private_key = credentials.private_key.replace(/\\n/g, '\n');
+      this.client = new BetaAnalyticsDataClient({ credentials });
     }
-
-    // const credentials = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON);
-    // credentials.private_key = credentials.private_key.replace(/\\n/g, '\n');
-    const credentials = JSON.parse(
-      readFileSync('service-account.json', 'utf8'),
-    );
-
-    this.client = new BetaAnalyticsDataClient({ credentials });
   }
 
   private async getMetrics(startDate: string, endDate: string) {
