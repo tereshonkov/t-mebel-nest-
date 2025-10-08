@@ -1,8 +1,8 @@
-import { Controller, Req, UseGuards } from '@nestjs/common';
+import { Controller, UseGuards } from '@nestjs/common';
 import { AnaliticsService } from './analitics.service';
-import { Get, Post, Body } from '@nestjs/common';
+import { Get } from '@nestjs/common';
 import { AnaliticsRequest } from './dto/analitics.dto';
-import { Role, Visitor } from '@prisma/client';
+import { Role } from '@prisma/client';
 import {
   ApiBadRequestResponse,
   ApiOkResponse,
@@ -11,83 +11,51 @@ import {
 import { JwtAuthGuard } from 'src/auth/guards/auth.guards';
 import { RoleGuard } from 'src/auth/guards/role.guard';
 import { Roles } from '../common/role.decorator';
-import type { Request } from 'express';
 
-export interface VisitorWithRelations {
-  id: string;
-  ip: string;
-  userAgent: string;
-  createdAt: Date;
-  updatedAt: Date;
-  visits: {
-    id: string;
-    url: string;
-    createdAt: Date;
-    updatedAt: Date;
-    visitorId: string;
-  }[];
-  called: {
-    id: string;
-    createdAt: Date;
-    updatedAt: Date;
-    visitorId: string;
-  }[];
-}
-
-@Controller('analitics')
+@Controller('analitycs')
 export class AnaliticsController {
   constructor(private readonly analiticsService: AnaliticsService) {}
 
   @ApiOperation({
-    summary: 'Получить информацию о посетителях',
+    summary: 'Получить количество просмотров страниц за день',
   })
+  @ApiOkResponse({ type: [AnaliticsRequest] })
   @ApiBadRequestResponse({ description: 'Ошибка запроса' })
-  @ApiOkResponse({ type: AnaliticsRequest, description: 'Успешный ответ' })
   @UseGuards(JwtAuthGuard, RoleGuard)
   @Roles(Role.ADMIN)
-  @Get('visitors')
-  async getVisitors(): Promise<VisitorWithRelations[]> {
-    return await this.analiticsService.getVisitors();
+  @Get('day')
+  async getDailyMetrics(): Promise<any> {
+    return await this.analiticsService.getDailyMetrics();
   }
 
   @ApiOperation({
-    summary: 'Получить количество новых пользователей за сегодня',
+    summary: 'Получить количество просмотров страниц за месяц',
   })
+  @ApiOkResponse({ type: [AnaliticsRequest] })
   @ApiBadRequestResponse({ description: 'Ошибка запроса' })
-  @ApiOkResponse({ description: 'Успешный ответ' })
   @UseGuards(JwtAuthGuard, RoleGuard)
   @Roles(Role.ADMIN)
-  @Get('daily-users')
-  async getDailyUsers() {
-    return await this.analiticsService.getDailyUsers();
+  @Get('month')
+  async getMonthlyMetrics(): Promise<any> {
+    return await this.analiticsService.getMonthlyMetrics();
   }
 
   @ApiOperation({
-    summary: 'Получить количество новых пользователей за текущий месяц',
+    summary: 'Получить количество просмотров страниц за неделю',
   })
+  @ApiOkResponse({ type: [AnaliticsRequest] })
   @ApiBadRequestResponse({ description: 'Ошибка запроса' })
-  @ApiOkResponse({ description: 'Успешный ответ' })
   @UseGuards(JwtAuthGuard, RoleGuard)
   @Roles(Role.ADMIN)
-  @Get('monthly-users')
-  async getMonthlyUsers() {
-    return await this.analiticsService.getMonthlyUsers();
+  @Get('week')
+  async getWeeklyMetrics(): Promise<any> {
+    return await this.analiticsService.getWeeklyMetrics();
   }
 
-  @ApiOperation({ summary: 'Записать посещение страницы' })
-  @ApiBadRequestResponse({ description: 'Ошибка запроса' })
-  @ApiOkResponse({ description: 'Успешный ответ' })
-  @Post('page-visit')
-  async postPageVisit(
-    @Body() dto: AnaliticsRequest,
-    @Req() req: Request,
-  ): Promise<Visitor> {
-    const ip =
-      dto.ip ||
-      req.ip ||
-      req.headers['x-forwarded-for']?.toString() ||
-      'unknown';
-    dto.ip = ip;
-    return await this.analiticsService.postPageVisit(dto);
+  @UseGuards(JwtAuthGuard, RoleGuard)
+  @Roles(Role.ADMIN)
+  @Get('pageviews')
+  async getDailyPageViews(): Promise<any> {
+    return this.analiticsService.getPathMetrics();
   }
 }

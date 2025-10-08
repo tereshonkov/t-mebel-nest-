@@ -12,7 +12,11 @@ async function bootstrap() {
   expressApp.set('trust proxy', 1);
 
   app.enableCors({
-    origin: ['https://www.t-mebel.com.ua', 'http://localhost:3000'],
+    origin: [
+      'https://www.t-mebel.com.ua',
+      'http://localhost:3000',
+      'http://localhost:3001',
+    ],
     credentials: true,
   });
 

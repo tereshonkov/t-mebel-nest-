@@ -78,34 +78,8 @@ model Image {
   @@map("image")
 }
 
-model Visitor {
-  id String @id @default(uuid())
-
-  ip        String @unique
-  userAgent String @map("user_agent")
-  visits    PageVisit[]
-  called    CallClick[]
-
-  createdAt DateTime    @default(now()) @map("created_at")
-  updatedAt DateTime    @updatedAt @map("updated_at")
-  @@map("visitor")
-}
-
-model PageVisit {
-  id        String   @id @default(uuid())
-  visitor   Visitor  @relation(fields: [visitorId], references: [id], onDelete: Cascade)
-  visitorId String   @map("visitor_id")
-  url       String
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-
-  @@map("page_visit")
-}
-
 model CallClick {
   id        String   @id @default(uuid())
-  visitor   Visitor  @relation(fields: [visitorId], references: [id], onDelete: Cascade)
-  visitorId String   @map("visitor_id")
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 

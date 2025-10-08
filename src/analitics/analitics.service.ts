@@ -3,129 +3,90 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'nestjs-prisma';
+import { BetaAnalyticsDataClient } from '@google-analytics/data';
 import { AnaliticsRequest } from './dto/analitics.dto';
-import { Prisma, Visitor } from '@prisma/client';
-
-export interface VisitorWithRelations {
-  id: string;
-  ip: string;
-  userAgent: string;
-  createdAt: Date;
-  updatedAt: Date;
-  visits: {
-    id: string;
-    url: string;
-    createdAt: Date;
-    updatedAt: Date;
-    visitorId: string;
-  }[];
-  called: { id: string; createdAt: Date; updatedAt: Date; visitorId: string }[];
-}
+import * as path from 'path';
 
 @Injectable()
 export class AnaliticsService {
-  constructor(private prismaService: PrismaService) {}
-
-  async getVisitors(): Promise<VisitorWithRelations[]> {
-    const visitors = await this.prismaService.visitor.findMany({
-      include: { visits: true, called: true },
+  private client: BetaAnalyticsDataClient;
+  constructor(private prismaService: PrismaService) {
+    this.client = new BetaAnalyticsDataClient({
+      keyFile: path.resolve(process.cwd(), 'src/config/service-account.json'),
     });
-    return visitors;
   }
+  private propertyId = 'properties/450691991';
 
-  async getDailyUsers() {
-    const now = new Date();
-
-    const start = new Date(
-      Date.UTC(
-        now.getUTCFullYear(),
-        now.getUTCMonth(),
-        now.getUTCDate(),
-        0,
-        0,
-        0,
-      ),
-    );
-    const end = new Date(
-      Date.UTC(
-        now.getUTCFullYear(),
-        now.getUTCMonth(),
-        now.getUTCDate(),
-        23,
-        59,
-        59,
-      ),
-    );
-    const result = await this.prismaService.visitor.count({
-      where: {
-        createdAt: {
-          gte: start,
-          lte: end,
-        },
-      },
-    });
-    return { dailyUsers: result };
-  }
-
-  async getMonthlyUsers() {
-    const now = new Date();
-
-    const start = new Date(
-      Date.UTC(
-        now.getUTCFullYear(),
-        now.getUTCMonth(),
-        now.getUTCDate(),
-        0,
-        0,
-        0,
-      ),
-    );
-    const end = new Date(
-      Date.UTC(
-        now.getUTCFullYear(),
-        now.getUTCMonth(),
-        now.getUTCDate(),
-        23,
-        59,
-        59,
-      ),
-    );
-    const result = await this.prismaService.visitor.count({
-      where: {
-        createdAt: {
-          gte: start,
-          lte: end,
-        },
-      },
-    });
-    return { monthlyUsers: result };
-  }
-
-  async postPageVisit(dto: AnaliticsRequest): Promise<Visitor> {
-    if (typeof dto.ip !== 'string') {
-      throw new Error('IP должен быть строкой');
-    }
-
-    if (dto.userAgent && typeof dto.userAgent !== 'string') {
-      throw new Error('userAgent должен быть строкой');
-    }
-    const visitor = await this.prismaService.visitor.upsert({
-      where: { ip: dto.ip },
-      update: { userAgent: dto.userAgent },
-      create: {
-        ip: dto.ip,
-        userAgent: dto.userAgent,
-      } as Prisma.VisitorUncheckedCreateInput,
+  private async getMetrics(startDate: string, endDate: string) {
+    const [response] = await this.client.runReport({
+      property: this.propertyId,
+      dateRanges: [{ startDate, endDate }],
+      metrics: [
+        { name: 'screenPageViews' },
+        { name: 'activeUsers' },
+        { name: 'newUsers' },
+      ],
+      dimensions: [{ name: 'date' }],
     });
 
-    if (dto.url) {
-      await this.prismaService.pageVisit.create({
-        data: {
-          url: dto.url,
-          visitorId: visitor.id,
-        },
+    if (!response.rows) return [];
+
+    const result: AnaliticsRequest[] = [];
+
+    for (const row of response.rows) {
+      const date = row.dimensionValues?.[0]?.value ?? '';
+      const screenPageViews = row.metricValues?.[0]?.value ?? '0';
+      const activeUsers = row.metricValues?.[1]?.value ?? '0';
+      const newUsers = row.metricValues?.[2]?.value ?? '0';
+
+      const formattedDate = `${date.slice(6, 8)}.${date.slice(4, 6)}`;
+
+      result.push({
+        date: formattedDate,
+        screenPageViews,
+        activeUsers,
+        newUsers,
       });
     }
-    return visitor;
+
+    return result;
+  }
+
+  private async getDailyPageViews() {
+    const [response] = await this.client.runReport({
+      property: this.propertyId,
+      dateRanges: [{ startDate: 'today', endDate: 'today' }],
+      metrics: [{ name: 'screenPageViews' }],
+      dimensions: [{ name: 'pagePath' }], // 👈 это важно
+    });
+
+    if (!response.rows) return [];
+
+    const result: { page: string; views: number }[] = [];
+
+    for (const row of response.rows) {
+      const page = row.dimensionValues?.[0]?.value ?? '/';
+      const views = Number(row.metricValues?.[0]?.value ?? '0');
+
+      result.push({ page, views });
+    }
+
+    return result;
+  }
+
+  async getDailyMetrics() {
+    return this.getMetrics('today', 'today');
+  }
+
+  async getMonthlyMetrics() {
+    return this.getMetrics('30daysAgo', 'today');
+  }
+
+  async getWeeklyMetrics() {
+    return this.getMetrics('7daysAgo', 'today');
+  }
+
+  async getPathMetrics() {
+    return await this.getDailyPageViews();
   }
 }

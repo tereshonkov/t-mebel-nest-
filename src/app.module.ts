@@ -14,12 +14,11 @@ import { PrismaModule } from 'nestjs-prisma';
 import { UserModule } from './user/user.module';
 import { ImagesModule } from './images/images.module';
 import { AnaliticsModule } from './analitics/analitics.module';
-import { PagevisitModule } from './pagevisit/pagevisit.module';
 import { CallclickModule } from './callclick/callclick.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true, envFilePath: 'env' }),
+    ConfigModule.forRoot({ isGlobal: true, envFilePath: '.env' }),
     PassportModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],
@@ -29,12 +28,11 @@ import { CallclickModule } from './callclick/callclick.module';
     AuthModule,
     ProductModule,
     ReviewsModule,
-    TelegramModule,
+    ...(process.env.NODE_ENV !== 'dev' ? [TelegramModule] : []),
     PrismaModule,
     UserModule,
     ImagesModule,
     AnaliticsModule,
-    PagevisitModule,
     CallclickModule,
   ],
   controllers: [AppController],
