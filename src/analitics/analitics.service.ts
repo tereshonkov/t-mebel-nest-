@@ -5,6 +5,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'nestjs-prisma';
 import { BetaAnalyticsDataClient } from '@google-analytics/data';
 import { AnaliticsRequest } from './dto/analitics.dto';
+import { readFileSync } from 'fs';
 
 @Injectable()
 export class AnaliticsService {
@@ -15,8 +16,11 @@ export class AnaliticsService {
       throw new Error('Не найден ключ Google Analytics в ENV!');
     }
 
-    const credentials = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON);
-    credentials.private_key = credentials.private_key.replace(/\\n/g, '\n');
+    // const credentials = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON);
+    // credentials.private_key = credentials.private_key.replace(/\\n/g, '\n');
+    const credentials = JSON.parse(
+      readFileSync('service-account.json', 'utf8'),
+    );
 
     this.client = new BetaAnalyticsDataClient({ credentials });
   }
