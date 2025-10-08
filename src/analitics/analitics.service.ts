@@ -5,17 +5,20 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'nestjs-prisma';
 import { BetaAnalyticsDataClient } from '@google-analytics/data';
 import { AnaliticsRequest } from './dto/analitics.dto';
-import * as path from 'path';
 
 @Injectable()
 export class AnaliticsService {
   private client: BetaAnalyticsDataClient;
-  constructor(private prismaService: PrismaService) {
-    this.client = new BetaAnalyticsDataClient({
-      keyFile: path.resolve(process.cwd(), 'src/config/service-account.json'),
-    });
-  }
   private propertyId = 'properties/450691991';
+  constructor(private prismaService: PrismaService) {
+    if (!process.env.GOOGLE_SERVICE_ACCOUNT_JSON) {
+      throw new Error('Не найден ключ Google Analytics в ENV!');
+    }
+
+    const credentials = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON);
+
+    this.client = new BetaAnalyticsDataClient({ credentials });
+  }
 
   private async getMetrics(startDate: string, endDate: string) {
     const [response] = await this.client.runReport({
