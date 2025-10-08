@@ -16,7 +16,6 @@ export class AnaliticsService {
     }
 
     const credentials = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON);
-    credentials.private_key = credentials.private_key.replace(/\\n/g, '\n');
 
     this.client = new BetaAnalyticsDataClient({ credentials });
   }
