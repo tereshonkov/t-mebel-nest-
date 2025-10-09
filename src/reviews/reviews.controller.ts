@@ -67,7 +67,7 @@ export class ReviewsController {
   @ApiBadRequestResponse({ description: 'Ошибка при одобрении отзыва' })
   @ApiOkResponse({ description: 'Отзыв успешно одобрен' })
   @Post('approve-review/:id')
-  async approveReview(@Param('id') id: string, @Body() dto: ReviewRequest) {
-    return this.reviewsService.approveReview(id, dto);
+  async approveReview(@Param('id') id: string) {
+    return this.reviewsService.approveReview(id);
   }
 }

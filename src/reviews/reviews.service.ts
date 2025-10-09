@@ -19,10 +19,10 @@ export class ReviewsService {
     });
   }
 
-  async approveReview(id: string, dto: ReviewRequest): Promise<Review> {
+  async approveReview(id: string): Promise<Review> {
     return this.prismaService.review.update({
       where: { id },
-      data: { isApproved: dto.isApproved },
+      data: { isApproved: true },
     });
   }
 
