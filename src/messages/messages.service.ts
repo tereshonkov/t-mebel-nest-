@@ -17,6 +17,17 @@ export class MessagesService {
   }
 
   async getMessages(): Promise<any> {
-    return await this.prismaService.messages.findMany();
+    return await this.prismaService.messages.findMany({
+      where: {
+        read: false,
+      },
+    });
+  }
+
+  async markAsRead(id: string): Promise<any> {
+    return await this.prismaService.messages.update({
+      where: { id },
+      data: { read: true },
+    });
   }
 }

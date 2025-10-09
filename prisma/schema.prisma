@@ -91,6 +91,7 @@ model Messages {
   name      String
   phone     String
   message   String
+  read      Boolean  @default(false)
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 

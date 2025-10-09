@@ -1,4 +1,4 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Patch } from '@nestjs/common';
 import { MessagesService } from './messages.service';
 import { Body, Post, Get } from '@nestjs/common';
 import { MessageRequest } from './dto/messages.dto';
@@ -14,5 +14,10 @@ export class MessagesController {
   @Get()
   async getAllMessages(): Promise<any> {
     return this.messagesService.getMessages();
+  }
+
+  @Patch('read/:id')
+  async markMessageAsRead(@Body('id') id: string): Promise<any> {
+    return this.messagesService.markAsRead(id);
   }
 }
