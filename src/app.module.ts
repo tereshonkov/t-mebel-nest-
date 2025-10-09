@@ -15,6 +15,7 @@ import { UserModule } from './user/user.module';
 import { ImagesModule } from './images/images.module';
 import { AnaliticsModule } from './analitics/analitics.module';
 import { CallclickModule } from './callclick/callclick.module';
+import { MessagesModule } from './messages/messages.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { CallclickModule } from './callclick/callclick.module';
     ImagesModule,
     AnaliticsModule,
     CallclickModule,
+    MessagesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
