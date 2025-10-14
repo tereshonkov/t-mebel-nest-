@@ -5,9 +5,9 @@ import { Storage } from '@google-cloud/storage';
 import { readFileSync } from 'fs';
 
 interface ServiceAccount {
-  projectId: string;
-  clientEmail: string;
-  privateKey: string;
+  project_id: string;
+  client_email: string;
+  private_key: string;
 }
 
 @Injectable()
@@ -21,10 +21,10 @@ export class ImagesService {
     ) as ServiceAccount;
 
     this.storage = new Storage({
-      projectId: credentials.projectId,
+      projectId: credentials.project_id,
       credentials: {
-        client_email: credentials.clientEmail,
-        private_key: credentials.privateKey,
+        client_email: credentials.client_email,
+        private_key: credentials.private_key,
       },
     });
   }
