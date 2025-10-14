@@ -73,7 +73,7 @@ export class ImagesController {
   }
 
   @Post('upload')
-  @UseInterceptors(FileInterceptor('file'))
+  @UseInterceptors(FileInterceptor('files'))
   async uploadImage(@UploadedFile() files: Express.Multer.File[]) {
     const urls = await Promise.all(
       files.map((file) => this.imagesService.uploadImage(file)),
