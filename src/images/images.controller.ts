@@ -5,6 +5,8 @@ import {
   UseGuards,
   Delete,
   Put,
+  UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
 import { ImagesService } from './images.service';
 import { Get, Post } from '@nestjs/common';
@@ -18,6 +20,7 @@ import { JwtAuthGuard } from 'src/auth/guards/auth.guards';
 import { RoleGuard } from 'src/auth/guards/role.guard';
 import { Role } from '@prisma/client/wasm';
 import { Roles } from 'src/common/role.decorator';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('images')
 export class ImagesController {
@@ -67,5 +70,11 @@ export class ImagesController {
   @Put('update-image/:id')
   async putImage(@Param('id') id: string, @Body() dto: ImageRequest) {
     return await this.imagesService.updateImage(id, dto);
+  }
+
+  @Post('upload')
+  @UseInterceptors(FileInterceptor('file'))
+  async uploadImage(@UploadedFile() file: Express.Multer.File) {
+    return await this.imagesService.uploadImage(file);
   }
 }

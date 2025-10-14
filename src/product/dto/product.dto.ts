@@ -1,5 +1,11 @@
 import { Category } from '@prisma/client';
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+  IsArray,
+  IsOptional,
+} from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class ProductRequest {
@@ -42,4 +48,13 @@ export class ProductRequest {
   @IsNotEmpty()
   @IsString()
   category: Category;
+
+  @ApiProperty({
+    description: 'IDs of images',
+    type: [String],
+    required: false,
+  })
+  @IsArray()
+  @IsOptional()
+  imageIds?: string[]; // <- сюда будут приходить id изображений
 }

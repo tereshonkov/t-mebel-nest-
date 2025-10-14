@@ -40,7 +40,21 @@ export class ProductService {
   }
 
   async createProduct(dto: ProductRequest) {
-    return await this.prismaService.product.create({ data: { ...dto } });
+    return await this.prismaService.product.create({
+      data: {
+        title: dto.title,
+        description: dto.description,
+        color: dto.color,
+        furnitures: dto.furnitures,
+        width: dto.width,
+        height: dto.height,
+        rating: dto.rating,
+        category: dto.category,
+        images: dto.imageIds
+          ? { connect: dto.imageIds.map((id) => ({ id })) }
+          : undefined,
+      },
+    });
   }
 
   async deleteProduct(id: string) {
