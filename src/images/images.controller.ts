@@ -6,7 +6,6 @@ import {
   Delete,
   Put,
   UseInterceptors,
-  UploadedFile,
   UploadedFiles,
 } from '@nestjs/common';
 import { ImagesService } from './images.service';
