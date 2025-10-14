@@ -20,7 +20,7 @@ import { JwtAuthGuard } from 'src/auth/guards/auth.guards';
 import { RoleGuard } from 'src/auth/guards/role.guard';
 import { Role } from '@prisma/client/wasm';
 import { Roles } from 'src/common/role.decorator';
-import { FileInterceptor } from '@nestjs/platform-express';
+import { FilesInterceptor } from '@nestjs/platform-express';
 
 @Controller('images')
 export class ImagesController {
@@ -73,7 +73,7 @@ export class ImagesController {
   }
 
   @Post('upload')
-  @UseInterceptors(FileInterceptor('files'))
+  @UseInterceptors(FilesInterceptor('files'))
   async uploadImage(@UploadedFile() files: Express.Multer.File[]) {
     const urls = await Promise.all(
       files.map((file) => this.imagesService.uploadImage(file)),
