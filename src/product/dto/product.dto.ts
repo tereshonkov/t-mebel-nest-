@@ -56,5 +56,5 @@ export class ProductRequest {
   })
   @IsArray()
   @IsOptional()
-  imageIds?: string[]; // <- сюда будут приходить id изображений
+  imageIds?: string[];
 }
