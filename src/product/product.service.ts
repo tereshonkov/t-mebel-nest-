@@ -50,7 +50,14 @@ export class ProductService {
         height: dto.height,
         rating: dto.rating,
         category: dto.category,
-        images: dto.images?.length ? { create: dto.images } : undefined,
+        images: dto.images?.length
+          ? {
+              create: dto.images.map((img, index) => ({
+                ...img,
+                isCover: index === 0,
+              })),
+            }
+          : undefined,
       },
     });
   }
@@ -79,7 +86,14 @@ export class ProductService {
         height: dto.height,
         rating: dto.rating,
         category: dto.category,
-        images: dto.images?.length ? { create: dto.images } : undefined,
+        images: dto.images?.length
+          ? {
+              create: dto.images.map((img, index) => ({
+                ...img,
+                isCover: index === 0,
+              })),
+            }
+          : undefined,
       },
     });
 
