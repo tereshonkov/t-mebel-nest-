@@ -7,6 +7,7 @@ import {
   Put,
   UseInterceptors,
   UploadedFile,
+  UploadedFiles,
 } from '@nestjs/common';
 import { ImagesService } from './images.service';
 import { Get, Post } from '@nestjs/common';
@@ -74,7 +75,7 @@ export class ImagesController {
 
   @Post('upload')
   @UseInterceptors(FilesInterceptor('files'))
-  async uploadImage(@UploadedFile() files: Express.Multer.File[]) {
+  async uploadImage(@UploadedFiles() files: Express.Multer.File[]) {
     const urls = await Promise.all(
       files.map((file) => this.imagesService.uploadImage(file)),
     );
