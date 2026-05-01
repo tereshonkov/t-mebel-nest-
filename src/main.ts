@@ -14,6 +14,7 @@ async function bootstrap() {
   app.enableCors({
     origin: [
       'https://www.t-mebel.com.ua',
+      'https://t-mebel.com.ua',
       'http://localhost:3000',
       'http://localhost:3001',
     ],
