@@ -5,7 +5,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { JwtService } from '@nestjs/jwt';
+import { JwtService, type JwtSignOptions } from '@nestjs/jwt';
 import { PrismaService } from '../prisma/prisma.service';
 import { Response, Request } from 'express';
 import { LoginRequest } from './dto/login.dto';
@@ -87,13 +87,15 @@ export class AuthService {
   private generateToken(id: string) {
     const payload: JwtPayload = { id };
 
-    const accessToken = this.jwtService.sign(payload, {
-      expiresIn: this.JWT_ACCESS_TOKEN_TTL,
-    });
+    const accessOptions: JwtSignOptions = {
+      expiresIn: this.JWT_ACCESS_TOKEN_TTL as JwtSignOptions['expiresIn'],
+    };
+    const refreshOptions: JwtSignOptions = {
+      expiresIn: this.JWT_REFRESH_TOKEN_TTL as JwtSignOptions['expiresIn'],
+    };
 
-    const refreshToken = this.jwtService.sign(payload, {
-      expiresIn: this.JWT_REFRESH_TOKEN_TTL,
-    });
+    const accessToken = this.jwtService.sign(payload, accessOptions);
+    const refreshToken = this.jwtService.sign(payload, refreshOptions);
     return { accessToken, refreshToken };
   }
 
