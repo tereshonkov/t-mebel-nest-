@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -14,66 +8,57 @@ datasource db {
 }
 
 model User {
-  id String @id @default(uuid())
-
-  name     String
-  email    String @unique
-  password String
-  role     Role   @default(USER)
-
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  id        String     @id @default(uuid())
+  name      String
+  email     String     @unique
+  password  String
+  role      Role       @default(USER)
+  createdAt DateTime   @default(now()) @map("created_at")
+  updatedAt DateTime   @updatedAt @map("updated_at")
+  accounts  accounts[]
+  sessions  sessions[]
 
   @@map("user")
 }
 
 model Product {
-  id String @id @default(uuid())
-
+  id          String   @id @default(uuid())
   title       String
   description String
-  color       String
   furnitures  String
-  images      Image[]
-  width       Int
-  height      Int
-  rating      Float
   category    Category @default(OTHER)
-  reviews     Review[]
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @updatedAt @map("updated_at")
+  images      Image[]
+  reviews     Review[]
 
   @@map("product")
 }
 
 model Review {
-  id String @id @default(uuid())
-
+  id         String   @id @default(uuid())
   name       String
   text       String
+  productId  String   @map("product_id")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+  isApproved Boolean  @default(false) @map("is_aproved")
   image      Image[]
-  productId  String  @map("product_id")
-  product    Product @relation(fields: [productId], references: [id], onDelete: Cascade)
-  isApproved Boolean @default(false) @map("is_aproved")
-
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  product    Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
 
   @@map("reviews")
 }
 
 model Image {
-  id String @id @default(uuid())
-
+  id        String   @id @default(uuid())
   url       String
-  product   Product? @relation(fields: [productId], references: [id])
   productId String?  @map("product_id")
-  review    Review?  @relation(fields: [reviewId], references: [id])
   reviewId  String?
   isCover   Boolean  @default(false) @map("is_cover")
-
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
+  product   Product? @relation(fields: [productId], references: [id])
+  review    Review?  @relation(fields: [reviewId], references: [id])
 
   @@map("image")
 }
@@ -91,11 +76,45 @@ model Messages {
   name      String
   phone     String
   message   String
-  read      Boolean  @default(false)
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
+  read      Boolean  @default(false)
 
   @@map("messages")
+}
+
+model accounts {
+  id                String  @id
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model sessions {
+  id           String   @id
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model verification_tokens {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
 }
 
 enum Category {

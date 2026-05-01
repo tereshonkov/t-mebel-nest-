@@ -22,27 +22,7 @@ export class ProductRequest {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  color: string;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
   furnitures: string;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsNumber()
-  width: number;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsNumber()
-  height: number;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsNumber()
-  rating: number;
 
   @ApiProperty()
   @IsNotEmpty()
