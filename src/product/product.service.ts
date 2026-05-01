@@ -44,7 +44,6 @@ export class ProductService {
       data: {
         title: dto.title,
         description: dto.description,
-        furnitures: dto.furnitures,
         category: dto.category,
         images: dto.images?.length
           ? {
@@ -76,7 +75,6 @@ export class ProductService {
       data: {
         title: dto.title,
         description: dto.description,
-        furnitures: dto.furnitures,
         category: dto.category,
         images: dto.images?.length
           ? {

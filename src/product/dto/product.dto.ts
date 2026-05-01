@@ -22,11 +22,6 @@ export class ProductRequest {
   @ApiProperty()
   @IsNotEmpty()
   @IsString()
-  furnitures: string;
-
-  @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
   category: Category;
 
   @ApiProperty({
