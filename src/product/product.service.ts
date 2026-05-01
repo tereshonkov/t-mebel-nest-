@@ -44,11 +44,7 @@ export class ProductService {
       data: {
         title: dto.title,
         description: dto.description,
-        color: dto.color,
         furnitures: dto.furnitures,
-        width: dto.width,
-        height: dto.height,
-        rating: dto.rating,
         category: dto.category,
         images: dto.images?.length
           ? {
@@ -80,11 +76,7 @@ export class ProductService {
       data: {
         title: dto.title,
         description: dto.description,
-        color: dto.color,
         furnitures: dto.furnitures,
-        width: dto.width,
-        height: dto.height,
-        rating: dto.rating,
         category: dto.category,
         images: dto.images?.length
           ? {
