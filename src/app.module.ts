@@ -19,7 +19,11 @@ import { MessagesModule } from './messages/messages.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true, envFilePath: '.env' }),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath:
+        process.env.NODE_ENV === 'test' ? '.env.test' : '.env',
+    }),
     PassportModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],
@@ -29,7 +33,7 @@ import { MessagesModule } from './messages/messages.module';
     AuthModule,
     ProductModule,
     ReviewsModule,
-    ...(process.env.NODE_ENV !== 'dev' ? [TelegramModule] : []),
+    ...(process.env.ENABLE_TELEGRAM === 'true' ? [TelegramModule] : []),
     PrismaModule,
     UserModule,
     ImagesModule,
