@@ -1,0 +1,385 @@
+{
+  "LocaleLayout": {
+    "title": "T-Mebel — Custom Furniture in Kharkiv",
+    "description": "Custom kitchens, wardrobes, and furniture in Kharkiv. Individual approach, fair prices, own production."
+  },
+  "header": {
+    "home": "Home",
+    "service": "Service",
+    "about": "About Us",
+    "contacts": "Contacts",
+    "language": "Language",
+    "call": "Call Us",
+    "menu": "Menu"
+  },
+  "hero": {
+    "title": "Custom Furniture Kharkiv",
+    "subtitle": "Cost estimation, design, and deadlines before manufacturing starts",
+    "button": "Get a quote",
+    "buttonTwo": "View portfolio",
+    "header": "We design and manufacture ",
+    "bold": "furniture for your space"
+  },
+  "service": {
+    "titleKitchen": "Perfect custom kitchens — style, functionality, and quality",
+    "subtitleKitchen": "We offer custom kitchens tailored to your preferences and space. Every project is an individual approach, thought out to the smallest detail: from appliance placement to material selection. We create custom kitchens that combine comfort, ergonomics, and modern design to make daily cooking a joy.",
+    "btnKitchen": "Kitchens",
+    "titleWardrobe": "Functional custom wardrobes for any interior",
+    "subtitleWardrobe": "We design custom wardrobes that make the most of your space. Corner, built-in, sliding, or classic — we create wardrobes that complement your interior and bring order and harmony to your home. Choose furniture that works for you!",
+    "btnWardrobe": "Wardrobes"
+  },
+  "reviews": {
+    "title": "Your reviews inspire us"
+  },
+  "furniture": {
+    "title": "Completed Projects",
+    "kitchens": "Kitchens",
+    "wardrobes": "Wardrobes",
+    "stores": "Stores",
+    "bedrooms": "Bedrooms",
+    "btnFurniture": "All Projects"
+  },
+  "faq": {
+    "title": "Frequently",
+    "titleBold": "Asked Questions",
+    "subtitle": "If you did not find the answer to your question, you can contact us by phone or through the form on the website.",
+    "question1": "What is the cost of custom furniture?",
+    "answer1": "The cost of custom furniture is determined individually and depends on the selected materials, complexity of the design, and type of fittings. We offer the optimal balance of price and quality so that each piece of custom furniture meets your expectations and budget.",
+    "question2": "What is the production time for custom furniture?",
+    "answer2": "The production time for custom furniture depends on the volume and complexity of the project. On average, it takes about 30 calendar days. However, if you need it urgently, we are always ready to discuss individual terms and try to speed up the process without losing quality.",
+    "question3": "What documents are issued when ordering furniture?",
+    "answer3": "When placing an order for custom furniture, we sign an official contract that details all stages of cooperation, cost, deadlines, and list of materials. This ensures transparency and reliability at every stage of your order fulfillment.",
+    "question4": "Can furniture be made according to our design?",
+    "answer4": "Yes, of course! We are happy to make custom furniture according to your individual design. You just need to share your ideas or drawings, and we will implement them taking into account all wishes regarding style, materials, and dimensions. Custom furniture manufacturing is an opportunity to create not just a piece of furniture but a unique solution that perfectly fits your home or office.",
+    "question5": "Where can I choose components for my project?",
+    "answer5": "Choosing components is an important step, and we fully take it into account. You will be able to select materials, fittings, and decorations according to your budget and preferences. We cooperate with reliable partners such as Viyar, Dark, Blum, and other trusted suppliers, so we offer a wide range of facades, mechanisms, and fittings — from economy to premium class. With us, you get the freedom of choice and confidence in the quality of every detail!",
+    "question6": "In which cities do you operate?",
+    "answer6": "Our main area of operation is the city of Kharkiv and the Kharkiv region. However, we are open to cooperation and ready to consider trips to other regions of Ukraine — such projects are discussed individually by agreement. If you are in another city, just contact us and we will try to find the best solution!"
+  },
+  "form": {
+    "titleRegular": "Get a",
+    "titleBold": "free ",
+    "titleRegularTwo": "consultation ",
+    "titleBoldTwo": "today!",
+    "btn": "Call us",
+    "subtitle": "Free consultation, designer visit and project cost estimate",
+    "badge": "20+ years of experience in furniture manufacturing",
+    "ctaButton": "Order consultation",
+    "note": "⚡ We will respond within 15 minutes"
+  },
+  "footer": {
+    "title": "Custom furniture — convenient. stylish. personalized.",
+    "subtitle": "© 2025 T-MEBEL All rights reserved",
+    "guides": "Guides"
+  },
+  "data_1": {
+    "titleSeo": "Custom Kitchen in Kharkiv",
+    "title": "Modern Kitchen in Light Tones with a Minimalist Design",
+    "description": "This kitchen is designed in a minimalist style with an emphasis on light color tones. Smooth handleless fronts, built-in appliances, and a well-thought-out storage system create a sense of space and comfort. A perfect choice for those who value modern design and functionality"
+  },
+  "data_2": {
+    "titleSeo": "Custom Kitchen in Kharkiv",
+    "title": "Elegant Kitchen with Contrasting Fronts and Modern Lighting",
+    "description": "A stylish kitchen with a harmonious blend of dark and light shades. Sleek lines, built-in appliances, and accent lighting create a cozy, modern atmosphere. A spacious work area and well-designed storage system make this kitchen a perfect solution for comfortable cooking and family gatherings."
+  },
+  "data_3": {
+    "titleSeo": "Custom Kitchen in Kharkiv",
+    "title": "Corner Kitchen with Matte Fronts and Chrome Holder",
+    "description": "A modern corner kitchen featuring light matte upper fronts and contrasting black lower elements. The chrome column holder draws special attention—perfect for storing glasses or accessories. This combination of colors and materials gives the kitchen a stylish, contemporary look, while the well-planned ergonomics make it convenient for everyday use."
+  },
+  "data_4": {
+    "titleSeo": "Custom Kitchen in Kharkiv",
+    "title": "White Kitchen with Matte Wood-Look Countertop and Built-in Black Appliances",
+    "description": "A modern kitchen with white matte fronts and a wood-look countertop creates a sense of coziness and harmony in the interior. Built-in black appliances emphasize a stylish contrast and add functionality. This combination of materials and tones remains one of the most popular solutions for modern kitchens, giving the space freshness and individuality."
+  },
+  "data_5": {
+    "titleSeo": "Custom Kitchen in Kharkiv",
+    "title": "Kitchen with Light Green Wood-Look Fronts and LED Lighting",
+    "description": "A modern kitchen featuring wood-look fronts in a fresh light green shade creates a bright and cozy space. The wood-look countertop harmonizes with the fronts, adding natural warmth to the interior. Built-in black appliances emphasize the modern style and provide maximum functionality. An LED strip for illuminating the work area not only makes the kitchen more convenient but also adds a stylish touch—highlighting the texture and color of the materials. This solution is perfect for those who appreciate originality, comfort, and modern design trends."
+  },
+  "data_17": {
+    "titleSeo": "Custom Kitchen in Kharkiv",
+    "title": "Kitchen with Stone-Effect Upper Fronts and Wood-Look Lower Elements",
+    "description": "A modern kitchen where the upper cabinets feature a stone-like texture, while the lower elements and countertop are wood-look. This combination of materials creates a stylish contrast and a sense of natural harmony. Stone fronts give the interior solidity and a contemporary look, while wooden surfaces add warmth and coziness. Ergonomic layout and modern materials ensure ease of use and durability, making the kitchen not only beautiful but also functional."
+  },
+  "data_6": {
+    "titleSeo": "Custom Sliding Wardrobe in Kharkiv",
+    "title": "Sliding Wardrobe with Mirrored Doors and Glass Shelves in Dresser Style",
+    "description": "A modern sliding wardrobe with mirrored doors is the perfect solution for visually expanding the space and creating a bright atmosphere in the room. The right section is equipped with open glass shelves, ideal for displaying decor, accessories, or books. The lower section is designed in the style of a dresser with pull-out drawers, providing extra convenience for storing clothes and small items. This combination of functionality and stylish design makes the wardrobe a versatile element of interior decor, suitable for both bedroom and living room."
+  },
+  "data_7": {
+    "titleSeo": "Custom Dresser-Wardrobe in Kharkiv",
+    "title": "Matte White Dresser-Wardrobe with Wooden Side Panels",
+    "description": "A stylish dresser-wardrobe with matte white doors perfectly complements the wood-look side panels. This design gives the furniture a modern and cozy appearance, easily fitting into any interior. Spacious compartments and pull-out drawers provide convenient storage for clothing and accessories, making the dresser both beautiful and highly functional."
+  },
+  "data_8": {
+    "titleSeo": "Custom Built-in Sliding Wardrobe in Kharkiv",
+    "title": "Built-in Sliding Wardrobe with Recessed Mirrors",
+    "description": "A modern built-in sliding wardrobe with doors featuring recessed mirrors fits perfectly into a niche or along any wall. Mirrored surfaces visually enlarge the space and brighten the interior, while the sliding system ensures convenient access to the contents even in tight areas. This wardrobe can be custom-made to any size and with tailored interior fittings, allowing you to make the most of every centimeter of space and create a harmonious, functional interior."
+  },
+  "data_9": {
+    "titleSeo": "Custom Built-in Sliding Wardrobe in Kharkiv",
+    "title": "Built-in Sliding Wardrobe with Large Mirrors and Four Sliding Doors",
+    "description": "A modern built-in sliding wardrobe with four sliding doors and large mirrored panels is an ideal solution for spacious bedrooms, hallways, or walk-in closets. The large mirrors visually expand the space and fill the room with light, while the sliding mechanism ensures easy access to the wardrobe’s contents even in tighter areas. This wardrobe can be custom-made to fit your exact dimensions and interior layout — including shelves, clothing rails, pull-out drawers, and accessory sections. Its elegant appearance and functionality make it a versatile element of modern interior design."
+  },
+  "data_10": {
+    "titleSeo": "Custom Sliding Wardrobe in Kharkiv",
+    "title": "Compact Wood-Look Sliding Wardrobe with Mirrors and Decorative Patterns",
+    "description": "A small sliding wardrobe with wood-look fronts fits perfectly into a modern interior where comfort and functionality matter. Mirrored inserts visually expand the space and bring in more light, while elegant patterns on the mirror surfaces add character and style. Its compact size makes it suitable even for smaller rooms, with a smart storage system that provides convenience for organizing clothes and accessories. This sliding wardrobe is both a practical and eye-catching element of your interior."
+  },
+  "data_11": {
+    "titleSeo": "Custom Sliding Wardrobe in Kharkiv",
+    "title": "Dark Wood Sliding Wardrobe with Black Slats, Mirrors, and Open Shelves",
+    "description": "A modern sliding wardrobe with dark wood-effect fronts and stylish black slats makes a striking accent in any interior. The model features three sliding doors, two of which are decorated with mirrored inserts that visually expand the space and add light. On the left side, there is an open section with shelves for decor or storage, while the additional large mirror enhances the wardrobe's functionality. This combination of materials and features ensures not only a stylish appearance but also maximum everyday convenience."
+  },
+  "data_12": {
+    "titleSeo": "Custom Shelf Unit in Kharkiv",
+    "title": "Shelf Unit with Red Drawers and Optical Equipment Mounts",
+    "description": "A modern shelving unit with a white frame and bright red drawers at the bottom serves as a stylish and functional interior element. The upper section is equipped with special mounts for storing optics or accessories, making it an ideal solution for a workshop, laboratory, or even home use. The contrasting color combination gives the furniture a contemporary look, while the well-designed storage system ensures convenience and organization. This shelving unit is perfect for spaces where both aesthetics and practicality are important."
+  },
+  "data_13": {
+    "titleSeo": "Custom Bedroom in Kharkiv",
+    "title": "Bedroom with Lift-Up Bed, Built-In Cabinets, and Spot Lighting",
+    "description": "A functional bedroom with a lift-up bed that fully conceals into the wardrobe allows for the most efficient use of space. The upper section includes spacious wood-look storage drawers, while built-in spot lighting adds comfortable illumination and a modern touch. The composition transitions smoothly into a sliding wardrobe, providing a unified style and practical organization. This solution is perfect for modern interiors that value ergonomics, aesthetics, and coziness."
+  },
+  "data_14": {
+    "titleSeo": "Custom Bed in Kharkiv",
+    "title": "White Double Bed with Lift-Up Mechanism and Two Nightstands",
+    "description": "A modern white double bed with two bedside nightstands features a convenient mattress lift-up mechanism. This allows access to a spacious storage compartment underneath, perfect for storing bed linens, clothing, or other items—helping to optimize space and keep the bedroom tidy. The lift mechanism can be manual, spring-loaded, or equipped with gas struts for easy and safe access to the inner compartment. This set is ideal for contemporary interiors that value both style and functionality."
+  },
+  "data_15": {
+    "titleSeo": "Custom Bedroom in Kharkiv",
+    "title": "White Floor-to-Ceiling Partition Shelf for Bedroom",
+    "description": "A modern white partition shelf is a perfect solution for zoning space in the bedroom. The structure extends to the ceiling, visually dividing the room while maintaining a sense of openness and light. The white color makes the interior feel more spacious and versatile, while the open shelves are ideal for displaying books, decor, or personal items. This shelving unit fits seamlessly into modern interior styles and helps organize functional storage without overwhelming the space."
+  },
+  "data_16": {
+    "titleSeo": "Custom TV Stand in Kharkiv",
+    "title": "TV Stand Wall Unit with Matte Glass on Wardrobe and TV Stand",
+    "description": "A modern wall unit designed in a minimalist style with matte glass on the wardrobe and TV stand is the perfect solution for the living room. The structure combines elegance and functionality, providing ample storage space and organizing the room. Matte glass elements give the interior a contemporary look, while thoughtful lighting highlights the design accents. This wall unit fits beautifully into any modern interior, creating a cozy atmosphere."
+  },
+  "data_d15d6f3c-3e3d-433e-a6f4-ed6e30487164": {
+    "titleSeo": "Custom built-in wardrobe in Kharkiv",
+    "title": "Walk-in wardrobe with sliding doors – a stylish solution for your home",
+    "description": "The perfect solution for organized storage – a modern walk-in wardrobe with a spacious sliding-door design. The furniture features a minimalist style, high-quality fittings, roomy shelves, clothing sections, and mirrored doors that visually expand the space. Each design element reflects a balance of aesthetics and functionality – create an elegant and well-organized interior with our custom-made furniture."
+  },
+  "data_d886a4df-6599-49f4-83b0-1670a27ffffa": {
+    "titleSeo": "Custom Bedroom in Kharkiv",
+    "title": "White Matte Bedroom Furniture Set",
+    "description": "A stylish and bright bedroom featuring a TV cabinet, comfortable bed, and vanity table for makeup. All pieces are finished in light matte white — stylish, cozy, and functional. A perfect example of a bedroom that can be custom-made to order."
+  },
+  "data_9e371ac7-b547-40a5-8adf-564c92009db9": {
+    "titleSeo": "Custom Sliding Wardrobe in Kharkiv",
+    "title": "Elegant Dark Oak Sliding Wardrobe",
+    "description": "Stylish sliding wardrobe in a dark oak finish. Even in a bright room, it looks luxurious and elegant. Perfect choice for creating a cozy and functional interior."
+  },
+  "data_c171a41d-02ce-4228-88d2-39b7aa9fc683": {
+    "titleSeo": "Custom kitchen in Kharkiv",
+    "title": "Elegant kitchen with contrasting facades and modern lighting",
+    "description": "A stylish kitchen featuring a harmonious color combination. Minimalist lines, built-in appliances, and thoughtful lighting create a cozy atmosphere. The window-side workspace and ergonomic storage system make this project an ideal solution for your home."
+  },
+  "contactPage": {
+    "contactTitle": "Contacts",
+    "adress": "Address: Kharkiv, 8 Lev Landau Avenue",
+    "phone": "Phone: 067 - 149 - 67 - 41",
+    "social": "Social Media",
+    "conactForm": "Contact Form",
+    "nameInput": "Name",
+    "phoneInput": "Phone",
+    "messageInput": "Message",
+    "submitButton": "Send"
+  },
+  "contactTabs": {
+    "tabsRegionLabel": "Contact methods",
+    "tabAddress": "Address",
+    "tabPhone": "Phone",
+    "tabSocial": "Social",
+    "addressHeading": "Addresses",
+    "addressLine": "Kharkiv, 8 Lev Landau Avenue",
+    "phoneHeading": "Phone",
+    "phoneDisplay": "067 - 149 - 67 - 41",
+    "socialHeading": "Social media",
+    "ariaInstagram": "Instagram",
+    "ariaTelegram": "Telegram",
+    "ariaFacebook": "Facebook"
+  },
+  "aboutUsPage": {
+    "title": "About Us",
+    "text1": "We are a team of specialists with many years of experience in custom furniture manufacturing. Since 2006, we have been offering functional, stylish, and convenient solutions for homes, offices, and commercial spaces.",
+    "text2": "Our main specialization is case furniture: kitchens, sliding wardrobes, beds, living rooms, walk-in closets, and much more. We take into account each client's individual preferences and use only high-quality materials and fittings.",
+    "text3": "Our goal is to create comfort in every interior and make it easier to choose furniture that truly suits you.",
+    "subtitle": "Contacts",
+    "phone": "Phone: 067 - 149 - 67 - 41"
+  },
+  "fullPage": {
+    "size": "Dimensions",
+    "furniture": "Fittings",
+    "phone": "take a call",
+    "review": "Send review"
+  },
+  "modal": {
+    "title": "Send a Review",
+    "name": "Your Name",
+    "review": "Your Review",
+    "submit": "Submit"
+  },
+  "seoHome": {
+    "title": "Custom Furniture in Kharkiv — Kitchens, Wardrobes, Closets",
+    "description": "Custom furniture in Kharkiv — kitchens, wardrobes, closets. Measurements and delivery. +380 67 149 67 41."
+  },
+  "seoAbout": {
+    "title": "About T-Mebel — Custom Furniture in Kharkiv",
+    "description": "Learn more about our company, experience, and approach to custom furniture manufacturing in Kharkiv. Quality and reliability since 2010."
+  },
+  "seoContact": {
+    "title": "Contacts — Custom Furniture in Kharkiv",
+    "description": "Contact us to order custom furniture in Kharkiv. Address, phone number, working hours, and contact form."
+  },
+  "seoPortfolio": {
+    "title": "Our Works — Custom Furniture in Kharkiv",
+    "description": "Our works: wardrobes, kitchens, bedrooms, furniture for shops and other spaces in Kharkiv. High-quality custom furniture manufacturing."
+  },
+  "seoServiceCategory": {
+    "KITCHEN": {
+      "title": "Custom kitchens Kharkiv — Pricing and cost estimates",
+      "description": "Custom kitchens in Kharkiv built to your measurements. Fair pricing, quality hardware and in-house manufacturing. Get a cost estimate for your kitchen today.",
+      "pageTitle": "Custom kitchens in Kharkiv",
+      "pageSubtitle": "Photos of our work — we'll quote any project to your measurements.",
+      "breadcrumbName": "Custom kitchens"
+    },
+    "WARDROBE": {
+      "title": "Wardrobes made to order Kharkiv — Sliding wardrobes to your measurements",
+      "description": "Custom wardrobes in Kharkiv. Sliding, built-in and hinged wardrobes turnkey. Fair pricing, quality hardware. Get a cost estimate today!",
+      "pageTitle": "Custom wardrobes in Kharkiv",
+      "pageSubtitle": "Browse photos of our work and pick the perfect wardrobe design for your home.",
+      "breadcrumbName": "Wardrobes & closets"
+    },
+    "STORE": {
+      "title": "Retail furniture made to order Kharkiv — Displays and shelving to your measurements",
+      "description": "Custom retail furniture in Kharkiv. Displays, shelving, counters and fixtures turnkey. Fair pricing, quality hardware. Get a cost estimate today!",
+      "pageTitle": "Retail furniture made to order in Kharkiv",
+      "pageSubtitle": "Browse photos of our work and pick the right solution for your store layout.",
+      "breadcrumbName": "Retail & shop furniture"
+    },
+    "BEDROOM": {
+      "title": "Bedrooms made to order Kharkiv — Bedroom furniture to your measurements",
+      "description": "Custom bedroom furniture in Kharkiv. Bedroom sets, beds, wardrobes and nightstands turnkey. Fair pricing, quality hardware. Get a cost estimate today!",
+      "pageTitle": "Bedrooms made to order in Kharkiv",
+      "pageSubtitle": "Browse photos of our work and pick the perfect bedroom design for your home.",
+      "breadcrumbName": "Bedrooms"
+    }
+  },
+  "servicePage": {
+    "title": "Our Works",
+    "subtitle": "Custom furniture created with love for details. Each project is unique."
+  },
+  "label": {
+    "prev": "Previous",
+    "next": "Next"
+  },
+  "popap": {
+    "title": "Wait a moment!",
+    "description": "Would you like a 10% discount on your first order?",
+    "text": "We’ll gift it to you — just leave your contact details and our designer will reach out to you!",
+    "name": "Your name",
+    "phone": "Your phone",
+    "btn": "Get my discount"
+  },
+  "popapSell": {
+    "title": "Hello!",
+    "description": "Would you like a free designer consultation?",
+    "text": "Leave your contact details, and our specialist will get in touch to help you choose furniture for your space!",
+    "name": "Your Name",
+    "phone": "Your Phone",
+    "btn": "Get Consultation",
+    "or": "You can also call us at",
+    "tel": "Or call us"
+  },
+  "whyYou": {
+    "title": "Who our furniture is perfect for",
+    "apartmentTitle": "For apartment owners",
+    "apartmentDesc": "After renovation or at the planning stage",
+    "houseTitle": "For private houses",
+    "houseDesc": "Kitchens, wardrobes, closets and other custom solutions",
+    "resultTitle": "For those who want results",
+    "resultDesc": "Not ready for standard store solutions",
+    "processTitle": "For clients who value the process",
+    "processDesc": "Clear stages, deadlines and calculations",
+    "note": "We work with custom projects and do not sell ready-made furniture",
+    "ctaButton": "Get Consultation"
+  },
+  "trustMe": {
+    "calculationTitle": "Clear calculation",
+    "calculationDesc": "Budget before work starts, no surprises",
+    "projectTitle": "Project for your space",
+    "projectDesc": "Furniture for your dimensions and layout",
+    "controlTitle": "Stage control",
+    "controlDesc": "You know what stage the project is at",
+    "responsibilityTitle": "Responsibility",
+    "responsibilityDesc": "From design to installation"
+  },
+  "popupForm": {
+    "triggerButton": "Book a consultation",
+    "title": "Free consultation",
+    "subtitle": "Leave your contacts and we will get back to you within 15 minutes",
+    "pill": "Individual calculation",
+    "formTitle": "Leave your contacts",
+    "formSubtitle": "We will prepare an accurate estimate and send the first sketches today",
+    "nameLabel": "Your name",
+    "namePlaceholder": "Maria",
+    "phoneLabel": "Phone",
+    "phonePlaceholder": "+38 (0_) ___ __ __",
+    "submitButton": "Submit request",
+    "note": "The manager will call to confirm details and material options",
+    "closeButton": "Close form",
+    "sending": "Sending...",
+    "success": "Request sent!",
+    "error": "Sending error"
+  },
+  "contactForm": {
+    "title": "Let's discuss your project",
+    "subtitle": "Leave a request and we will contact you within 15 minutes for a free consultation",
+    "nameLabel": "Your name",
+    "phoneLabel": "Phone",
+    "messageLabel": "Message",
+    "submitButton": "Submit request",
+    "note": "Free consultation and cost estimate",
+    "badgeYears": "20+ years",
+    "badgeExperience": "of experience in furniture manufacturing",
+    "privacy": "By clicking the button, you agree to the",
+    "privacyLink": "privacy policy",
+    "sending": "Sending...",
+    "success": "Request sent!",
+    "error": "Sending error"
+  },
+  "ctaBlock": {
+    "title": "How much will your furniture really cost?",
+    "description": "Standard prices per linear meter are often misleading. We will prepare a personalized offer that takes into account every millimeter of your space, reliable hardware and real budget — no hidden charges at the installation stage",
+    "button": "Get a quote"
+  },
+  "guides": {
+    "breadcrumb": "Guides",
+    "hubTitle": "Guides & articles",
+    "hubSubtitle": "Budget, materials, and ordering custom furniture in Kharkiv — with real project photos.",
+    "seoHubTitle": "Guides: custom furniture Kharkiv | T-Mebel",
+    "seoHubDescription": "Articles on kitchens, wardrobes, and how pricing and production work at T-Mebel.",
+    "clusterKitchen": "Kitchens",
+    "clusterBedroom": "Bedroom wardrobes",
+    "clusterGeneral": "General",
+    "readArticle": "Read",
+    "relatedHeading": "Portfolio by topic",
+    "portfolioProjectPrefix": "Portfolio"
+  },
+  "pageHeader": {
+    "backButton": "Back"
+  },
+  "productGallery": {
+    "imageAlt": "{title} — custom furniture Kharkiv, photo {photoNumber}",
+    "loading": "Loading...",
+    "loadError": "Could not load product",
+    "prevPhoto": "Previous photo",
+    "nextPhoto": "Next photo",
+    "goToPhoto": "Go to photo",
+    "ctaButton": "Order similar project",
+    "note": "Free consultation and cost estimate"
+  }
+}

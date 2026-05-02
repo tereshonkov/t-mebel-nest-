@@ -1,8 +1,13 @@
 /**
- * One-off: upsert ProductTranslation rows from Next message JSON files.
- * Run from repo root of Nest: npm run seed:translations
+ * Upsert ProductTranslation from Next-style messages (keys data_<productId>).
+ * Run from Nest repo root: npm run seed:translations
  *
- * Requires DATABASE_URL and paths to sibling ../t-mebel-next/src/messages/*.json
+ * Message sources (first match wins):
+ * 1. T_MEBEL_MESSAGES_DIR
+ * 2. scripts/i18n-snapshot/{uk,ru,en}.json (committed snapshot / manual export)
+ * 3. sibling ../../t-mebel-next/src/messages
+ *
+ * Requires DATABASE_URL in .env
  */
 import { PrismaClient, Locale } from '@prisma/client';
 import * as fs from 'fs';
@@ -13,6 +18,16 @@ const prisma = new PrismaClient();
 function messagesDir(): string {
   const fromEnv = process.env.T_MEBEL_MESSAGES_DIR;
   if (fromEnv) return path.resolve(fromEnv);
+
+  const snapshotDir = path.resolve(__dirname, 'i18n-snapshot');
+  if (
+    fs.existsSync(path.join(snapshotDir, 'uk.json')) &&
+    fs.existsSync(path.join(snapshotDir, 'ru.json')) &&
+    fs.existsSync(path.join(snapshotDir, 'en.json'))
+  ) {
+    return snapshotDir;
+  }
+
   return path.resolve(__dirname, '../../t-mebel-next/src/messages');
 }
 
