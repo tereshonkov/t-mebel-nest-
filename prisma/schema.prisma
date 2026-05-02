@@ -22,16 +22,32 @@ model User {
 }
 
 model Product {
-  id          String   @id @default(uuid())
-  title       String
-  description String
-  category    Category @default(OTHER)
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
-  images      Image[]
-  reviews     Review[]
+  id           String               @id @default(uuid())
+  title        String
+  description  String
+  category     Category             @default(OTHER)
+  createdAt    DateTime             @default(now()) @map("created_at")
+  updatedAt    DateTime             @updatedAt @map("updated_at")
+  images       Image[]
+  reviews      Review[]
+  translations ProductTranslation[]
 
   @@map("product")
+}
+
+model ProductTranslation {
+  id          String   @id @default(uuid())
+  productId   String   @map("product_id")
+  locale      Locale
+  title       String
+  description String
+  titleSeo    String?  @map("title_seo")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  product     Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, locale])
+  @@map("product_translation")
 }
 
 model Review {
@@ -114,6 +130,12 @@ model verification_tokens {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+enum Locale {
+  uk
+  ru
+  en
 }
 
 enum Category {
