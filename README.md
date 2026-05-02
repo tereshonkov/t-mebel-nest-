@@ -1,98 +1,124 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# t-mebel API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Backend для сайта **t-mebel** ([t-mebel.com.ua](https://t-mebel.com.ua)): REST API на **NestJS 11**, **PostgreSQL** (Prisma), JWT + httpOnly refresh cookie, загрузка изображений в **Google Cloud Storage**, опциональные уведомления в **Telegram** и метрики **Google Analytics Data API**.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Фронтенд админки и витрины — отдельный репозиторий (`t-mebel-next`).
 
-## Description
+## Стек
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+| Компонент | Технология |
+|-----------|------------|
+| Runtime | Node.js |
+| Framework | NestJS |
+| ORM | Prisma 6 |
+| Auth | Passport JWT, Argon2 |
+| Storage | GCS (`@google-cloud/storage`) |
+| API docs | Swagger — **`/docs`** |
 
-## Project setup
+## Требования
+
+- Node.js 22+ (см. `package.json` / CI)
+- PostgreSQL 16+ (локально или облако)
+- Для загрузки картинок и части фич — файл **`service-account.json`** (сервисный аккаунт GCP) в корне репозитория на машине/сервере (в git не коммитить)
+
+## Быстрый старт
 
 ```bash
-$ npm install
+npm ci
+cp .env.test.example .env   # или свой .env — см. таблицу ниже
+# заполнить DATABASE_URL, JWT_SECRET, COOKIE_DOMAIN, TTL JWT
+npx prisma migrate deploy
+npx prisma generate
+npm run start:dev
 ```
 
-## Compile and run the project
+Приложение слушает **`PORT`** (по умолчанию **3000**).
+
+Открыть интерактивную документацию: **http://localhost:3000/docs**
+
+## Переменные окружения
+
+| Переменная | Назначение |
+|------------|------------|
+| `DATABASE_URL` | PostgreSQL connection string для Prisma |
+| `JWT_SECRET` | Секрет подписи access/refresh JWT (HS256) |
+| `JWT_ACCESS_TOKEN_TTL` | TTL access token, напр. `15m` |
+| `JWT_REFRESH_TOKEN_TTL` | TTL refresh token, напр. `7d` |
+| `COOKIE_DOMAIN` | Домен cookie (локально часто `localhost`) |
+| `PORT` | Порт HTTP-сервера (необязательно) |
+| `NODE_ENV` | `production` влияет на `secure` / `sameSite` у cookie refresh, на способ инициализации GA-клиента |
+| `ENABLE_TELEGRAM` | Если `true`, подключается `TelegramModule` |
+| `TELEGRAM_BOT_TOKEN` | Токен бота (нужен при `ENABLE_TELEGRAM=true`) |
+| `GOOGLE_SERVICE_ACCOUNT_JSON` | JSON сервисного аккаунта **строкой** — используется в **не-production** для `AnaliticsService` (в production читается `service-account.json`) |
+
+Пример локального `.env` см. **`.env.test.example`** (там же образец для e2e).
+
+## Скрипты npm
+
+| Команда | Описание |
+|---------|----------|
+| `npm run start:dev` | Режим разработки с перезапуском |
+| `npm run build` | Сборка (перед `build` выполняется `prebuild` → **юнит-тесты**) |
+| `npm run build:deploy` | `prisma generate` + сборка — для CI/Render |
+| `npm run start:prod` | Старт из `dist/src/main.js` |
+| `npm run test` | Юнит-тесты (Jest) |
+| `npm run test:e2e` | E2E (нужен `DATABASE_URL`, см. ниже) |
+| `npm run seed:translations` | Синхронизация переводов продуктов из messages → `ProductTranslation` |
+
+## Модули и домены
+
+- **Auth** — регистрация, логин, refresh, logout; refresh в httpOnly cookie `refreshToken`.
+- **User** — пользователи, роли `USER` / `ADMIN` (защита эндпоинтов через guards).
+- **Product** — товары, категории, локализованные поля (`ProductTranslation`, локали `uk` / `ru` / `en`).
+- **Reviews** — отзывы к товарам (модерация `isApproved`).
+- **Images** — метаданные в БД, файлы — в бакет GCS `t-mebel`.
+- **Messages** — заявки/сообщения с сайта.
+- **Callclick** — учёт кликов по звонку.
+- **Analitics** — отчёты GA4 (Property ID зашит в коде сервиса; для прод/тест различается источник credentials).
+- **Telegram** — опционально (`ENABLE_TELEGRAM`).
+
+CORS разрешён для прод-доменов **`t-mebel.com.ua`** и локальных **`localhost:3000` / `3001`** (см. `src/main.ts`).
+
+## База данных
+
+- Схема: **`prisma/schema.prisma`**
+- Миграции: **`prisma/migrations/`**
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npx prisma migrate deploy   # применить миграции
+npx prisma studio           # GUI к данным (по желанию)
 ```
 
-## Run tests
+## Тесты и E2E
+
+Юнит-тесты: **`npm run test`**.
+
+E2E (`test/app.e2e-spec.ts`, Jest config **`test/jest-e2e.json`**):
+
+1. Поднять PostgreSQL для тестов, например:
+
+   ```bash
+   docker compose -f docker-compose.test.yml up -d
+   ```
+
+2. Скопировать **`.env.test.example`** → **`.env.test`**, выставить `DATABASE_URL` на тестовую БД (в примере порт **5433**).
+
+3. При `npm run test:e2e` global setup выполнит `prisma migrate deploy` при наличии `DATABASE_URL`.
+
+**Важно:** не использовать боевой `DATABASE_URL` для e2e — тесты создают пользователей вида `e2e-*@test.local`.
+
+## Деплой (Render)
+
+В репозитории есть **`render.yaml`**: сборка `npm ci && npm run build:deploy`, старт `npm run start:prod`. На хостинге нужно задать те же переменные окружения, что и в проде, и обеспечить наличие **`service-account.json`**, если используются загрузка изображений и/или аналитика в production-режиме.
+
+## Скрипт переводов продуктов
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm run seed:translations
 ```
 
-## Deployment
+Источник JSON с ключами `data_<productId>` (порядок приоритета описан в **`scripts/seed-product-translations-from-messages.ts`**): переменная `T_MEBEL_MESSAGES_DIR`, затем `scripts/i18n-snapshot/`, затем соседний `t-mebel-next/src/messages`.
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+## Лицензия
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
-```
-
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+`UNLICENSED` (приватный проект).
