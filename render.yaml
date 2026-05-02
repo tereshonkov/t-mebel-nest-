@@ -1,0 +1,10 @@
+# Render: root = repo root (где лежит этот файл и package.json).
+# Обязательно задайте Build Command в UI, если Blueprint не подхватился:
+#   npm ci && npm run build:deploy
+
+services:
+  - type: web
+    name: t-mebel-api
+    runtime: node
+    buildCommand: npm ci && npm run build:deploy
+    startCommand: npm run start:prod
